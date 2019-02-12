@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap-daohang.css"/>
+	</head>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="UTF-8"></script>
+	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="js/jquery-3.3.1.min.js" charset="UTF-8"></script>
+	<script src="js/base.js" charset="UTF-8"></script>
+
+	<script src="js/inventory/inventory-add-inventory.js" charset="UTF-8"></script>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<a href="storage-main.html" class="navbar-brand navbar-left" >小佳仓储</a>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class=""><a href="user-list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+						<li class=""><a href="commodity.html"><span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;商品管理</a></li>
+						<li class=""><a href="tenant.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;商户管理</a></li>
+						<li class=""><a href="location.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;库位管理</a></li>
+						<li class="active"><a href="inventory.html"><span class="glyphicon glyphicon-oil"></span>&nbsp;&nbsp;库存管理</a></li>
+						</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							
+							<a id="dlabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<script>
+                                    document.getElementById("dlabel").innerText=getcookie("username");
+								</script>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dlabel">
+								<li><a href="user-person.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;修改密码</a></li>
+								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;切换用户</a></li>
+							</ul>
+						</li>
+						<li><a href="#" onclick="saveExit()"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;安全退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		
+		
+		<!-- 主体  -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="list-group">
+						<a href="inventory.html" class="list-group-item active list-group-item">新建存单</a>
+						<a href="inventory-undeal.html" class="list-group-item">未处理库存</a>
+						<a href="inventory-deal.html" class="list-group-item list-group-item">已处理库存</a>
+						<a href="inventory-out.html" class="list-group-item list-group-item">已出库库存</a>
+					</div>
+				</div>
+				<div class="col-md-10">
+					
+					<div class="page-header">
+						<h1>建立存单</h1>
+					</div>
+					
+					<div>
+						<div class="form-group">
+							<label for="user">承办人</label>
+							<input id="user" type="text" name="username" class="form-control" readonly="readonly" />
+							<input id="userId" type="hidden"/>
+						</div>
+						<div class="form-group">
+							<label for="inventoryid">存单编号</label>
+							<input id="inventoryid" type="text" name="inventoryid" class="form-control" readonly="readonly" />
+						</div>
+						<div class="form-group">
+							<label for="agent">负责人</label>
+							<select id="agent" name="role" class="form-control">
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="kind">商品种类</label>
+							<input id="kind" type="text" name="number" class="form-control" placeholder="请输入商品种类" />
+						</div>
+						<div class="form-group">
+							<label for="price">商品总价</label>
+							<input id="price" type="text" name="number" class="form-control" placeholder="请输入商品总价" />
+						</div>
+						<button class="btn btn-success" onclick="addInventory()">下一步</button>
+						<button type="reset" class="btn btn-warning">重置</button>
+					</div>
+
+				</div>
+			</div>
+	</body>
+</html>

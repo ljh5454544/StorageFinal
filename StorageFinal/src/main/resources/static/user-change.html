@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap-daohang.css"/>
+	</head>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="UTF-8"></script>
+	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="js/jquery-3.3.1.min.js" charset="UTF-8"></script>
+	<script src="js/user/users.js" charset="UTF-8"></script>
+	<script src="js/base.js" charset="UTF-8"></script>
+	<script src="js/user/user-change.js" charset="UTF-8"></script>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<a href="storage-main.html" class="navbar-brand navbar-left" >小佳仓储</a>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="user-list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+						<li class=""><a href="commodity.html"><span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;商品管理</a></li>
+						<li class=""><a href="tenant.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;商户管理</a></li>
+						<li class=""><a href="location.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;库位管理</a></li>
+						<li class=""><a href="inventory.html"><span class="glyphicon glyphicon-oil"></span>&nbsp;&nbsp;库存管理</a></li>
+						</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a id="dlabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<script>
+                                    document.getElementById("dlabel").innerText=getcookie("username");
+								</script>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dlabel">
+								<li><a href="#" onclick="changeUser(-1)"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;修改密码</a></li>
+								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;切换用户</a></li>
+							</ul>
+						</li>
+						<li><a href="#" onclick="saveExit()"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;安全退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="list-group">
+						<a href="user-list.html" class="list-group-item">用户列表</a>
+						<a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">添加用户</a>
+						<a href="#" class="list-group-item active">信息修改</a>
+					</div>
+				</div>
+				<div class="col-md-10">
+					
+					<div class="page-header">
+						<h1>信息修改</h1>
+					</div>
+					
+					<div>
+						<div class="form-group">
+							<input id="addid" type="hidden" name="id" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label for="chtelephone">联系方式</label>
+							<input id="chtelephone" type="text" name="telephone" class="form-control" placeholder="请输入电话号码" />
+						</div>
+						<div class="form-group">
+							<label for="chmail">邮箱</label>
+							<input id="chmail" type="text" name="mail" class="form-control" placeholder="请输入邮箱" />
+						</div>
+						<div class="form-group">
+							<label for="chremark">备注</label>
+							<input id="chremark" type="text" name="remark" class="form-control" placeholder="请输入备注" />
+						</div>
+						<div class="form-group">
+							<label for="changeuser">职位信息</label>
+							<select id="changeuser" name="role" class="form-control">
+							</select>	
+						</div>
+						<button class="btn btn-success" onclick="updateUser()">提交</button>
+						<button type="reset" class="btn btn-warning">重置</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">添加用户</h4>
+		      </div>
+		      <div class="modal-body">
+				  <div>
+					  <div class="form-group">
+						  <label for="addusername">用户名</label>
+						  <input id="addusername" type="text" name="username" class="form-control" placeholder="请输入用户名" />
+					  </div>
+					  <div class="form-group">
+						  <label for="addpassword">密码</label>
+						  <input id="addpassword" type="password" name="password" class="form-control" placeholder="请输入密码" />
+					  </div>
+					  <div class="form-group">
+						  <label for="addrepassword">确认密码</label>
+						  <input id="addrepassword" type="password" name="repassword" class="form-control" placeholder="请再次输入密码" />
+					  </div>
+					  <div class="form-group">
+						  <label for="addtelephone">联系方式</label>
+						  <input id="addtelephone" type="text" name="telephone" class="form-control" placeholder="请输入电话号码" />
+					  </div>
+					  <div class="form-group">
+						  <label for="addmail">邮箱</label>
+						  <input id="addmail" type="text" name="mail" class="form-control" placeholder="请输入邮箱" />
+					  </div>
+					  <div class="form-group">
+						  <label for="addremark">备注</label>
+						  <input id="addremark" type="text" name="remark" class="form-control" placeholder="请输入备注" />
+					  </div>
+					  <div class="form-group">
+						  <label for="adduser">职位信息</label>
+						  <select id="adduser" name="role" class="form-control">
+						  </select>
+					  </div>
+					  <div class="form-group">
+						  <button class="btn btn-success" onclick="addUser()">提交</button>
+						  <button type="reset" class="btn btn-warning">重置</button>
+					  </div>
+				  </div>
+		      </div>
+		      <div class="modal-footer">
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+	</body>
+</html>

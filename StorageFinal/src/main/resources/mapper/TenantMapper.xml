@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jia.storage.mapper.TenantMapper" >
+  <resultMap id="BaseResultMap" type="com.jia.storage.entity.Tenant" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="agent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="telphone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, NAME, agent, location, telphone, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tenant
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tenant
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jia.storage.entity.Tenant" >
+    insert into tenant (id, NAME, agent, 
+      location, telphone, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jia.storage.entity.Tenant" >
+    insert into tenant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="agent != null" >
+        agent,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="telphone != null" >
+        telphone,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null" >
+        #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jia.storage.entity.Tenant" >
+    update tenant
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null" >
+        agent = #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jia.storage.entity.Tenant" >
+    update tenant
+    set NAME = #{name,jdbcType=VARCHAR},
+      agent = #{agent,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 增加自定义方法 -->
+  <sql id="condition">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="agent != null">
+        and agent = #{agent,jdbcType=VARCHAR}
+      </if>
+      <if test="location != null">
+        and location = #{location,jdbcType=VARCHAR}
+      </if>
+      <if test="telphone != null">
+        and telphone = #{telphone,jdbcType=VARCHAR}
+      </if>
+      <if test="remark != null">
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMap" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tenant
+    <include refid="condition"/>
+    <if test="startRow != null">
+      limit #{startRow}, #{rowsPerPage}
+    </if>
+  </select>
+
+  <select id="selectRowsNum" resultType="int">
+    select count(id) from tenant
+  </select>
+
+
+</mapper>

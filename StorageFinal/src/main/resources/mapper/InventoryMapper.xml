@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jia.storage.mapper.InventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.jia.storage.entity.Inventory" >
+    <constructor>
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="identity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="undertaker" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="agent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="kind" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="price" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="recordTime" jdbcType="TIMESTAMP" javaType="java.lang.String" />
+      <arg column="dealTime" jdbcType="TIMESTAMP" javaType="java.lang.String" />
+      <arg column="positions" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    inventory.id, identity, undertaker, agent, kind, price, recordTime, dealTime, positions, stat
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />, username
+    from inventory, users
+    where inventory.id = #{id,jdbcType=BIGINT} and inventory.undertaker = users.id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from inventory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jia.storage.entity.Inventory" >
+    insert into inventory (id, identity, undertaker, 
+      agent, kind, price, recordTime, 
+      dealTime, positions, stat
+      )
+    values (#{id,jdbcType=BIGINT}, #{identity,jdbcType=VARCHAR}, #{undertaker,jdbcType=BIGINT}, 
+      #{agent,jdbcType=VARCHAR}, #{kind,jdbcType=BIGINT}, #{price,jdbcType=BIGINT}, #{recordtime,jdbcType=TIMESTAMP}, 
+      #{dealtime,jdbcType=TIMESTAMP}, #{positions,jdbcType=VARCHAR}, #{stat,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jia.storage.entity.Inventory" >
+    insert into inventory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="undertaker != null" >
+        undertaker,
+      </if>
+      <if test="agent != null" >
+        agent,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="recordtime != null" >
+        recordTime,
+      </if>
+      <if test="dealtime != null" >
+        dealTime,
+      </if>
+      <if test="positions != null" >
+        positions,
+      </if>
+      <if test="stat != null" >
+        stat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="undertaker != null" >
+        #{undertaker,jdbcType=BIGINT},
+      </if>
+      <if test="agent != null" >
+        #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="recordtime != null" >
+        #{recordtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealtime != null" >
+        #{dealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positions != null" >
+        #{positions,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        #{stat,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jia.storage.entity.Inventory" >
+    update inventory
+    <set >
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="undertaker != null" >
+        undertaker = #{undertaker,jdbcType=BIGINT},
+      </if>
+      <if test="agent != null" >
+        agent = #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="recordtime != null" >
+        recordTime = #{recordtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealtime != null" >
+        dealTime = #{dealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positions != null" >
+        positions = #{positions,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        stat = #{stat,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jia.storage.entity.Inventory" >
+    update inventory
+    set identity = #{identity,jdbcType=VARCHAR},
+      undertaker = #{undertaker,jdbcType=BIGINT},
+      agent = #{agent,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=BIGINT},
+      price = #{price,jdbcType=BIGINT},
+      recordTime = #{recordtime,jdbcType=TIMESTAMP},
+      dealTime = #{dealtime,jdbcType=TIMESTAMP},
+      positions = #{positions,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!-- 自定义方法  -->
+  <sql id="condition">
+    <where>
+      <if test="id != null">
+        and inventory.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="identity != null">
+        and identity = #{identity,jdbcType=VARCHAR}
+      </if>
+      <if test="undertaker != null">
+        and undertaker = #{undertaker,jdbcType=BIGINT}
+      </if>
+      <if test="agent != null">
+        and agent = #{agent,jdbcType=VARCHAR}
+      </if>
+      <if test="kind != null">
+        and kind = #{kind,jdbcType=BIGINT}
+      </if>
+      <if test="price != null">
+        and price = #{price,jdbcType=BIGINT}
+      </if>
+      <if test="recordTime != null">
+        and recordTime = #{recordTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="dealTime != null">
+        and dealTime = #{dealTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="positions != null">
+        and positions = #{positions,jdbcType=VARCHAR}
+      </if>
+      <if test="stat != null">
+        and stat = #{stat,jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMap" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />, username
+    from inventory, users
+    <include refid="condition"/>
+    and inventory.undertaker = users.id
+    <if test="startRow != null">
+      limit #{startRow}, #{rowsPerPage}
+    </if>
+  </select>
+
+  <select id="selectRowsNum" resultType="int">
+    select count(id) from inventory
+  </select>
+</mapper>

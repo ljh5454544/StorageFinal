@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jia.storage.mapper.ShelfMapper" >
+  <resultMap id="BaseResultMap" type="com.jia.storage.entity.Shelf" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="num" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="room_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, NAME, num, remark, room_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from shelf
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from shelf
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jia.storage.entity.Shelf" >
+    insert into shelf (id, NAME, num, 
+      remark, room_id)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{roomId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jia.storage.entity.Shelf" >
+    insert into shelf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jia.storage.entity.Shelf" >
+    update shelf
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jia.storage.entity.Shelf" >
+    update shelf
+    set NAME = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      room_id = #{roomId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 自定义方法  -->
+  <sql id="condition">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=BIGINT}
+      </if>
+      <if test="remark != null">
+        and num = #{num,jdbcType=BIGINT}
+      </if>
+      <if test="remark != null">
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="roomId != null">
+        and room_id = #{roomId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMap" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from shelf
+    <include refid="condition"/>
+    <if test="startRow != null">
+      limit #{startRow}, #{rowsPerPage}
+    </if>
+  </select>
+
+  <select id="selectRowsNum" resultType="int">
+    select count(id) from shelf
+  </select>
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jia.storage.mapper.RecordMapper" >
+  <resultMap id="BaseResultMap" type="com.jia.storage.entity.Record" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="inventory_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="commodity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="num" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="price" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="singlePrice" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    record.id, record.inventory_id, record.commodity_id, record.num, record.price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />, commodity.name, commodity.price as 'singlePrice'
+    from record, commodity
+    where record.id = #{id,jdbcType=BIGINT} and  record.commodity_id = commodity.id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jia.storage.entity.Record" >
+    insert into record (id, inventory_id, commodity_id, 
+      num, price)
+    values (#{id,jdbcType=BIGINT}, #{inventoryId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT}, 
+      #{num,jdbcType=BIGINT}, #{price,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jia.storage.entity.Record" >
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="inventoryId != null" >
+        inventory_id,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryId != null" >
+        #{inventoryId,jdbcType=BIGINT},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jia.storage.entity.Record" >
+    update record
+    <set >
+      <if test="inventoryId != null" >
+        inventory_id = #{inventoryId,jdbcType=BIGINT},
+      </if>
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jia.storage.entity.Record" >
+    update record
+    set inventory_id = #{inventoryId,jdbcType=BIGINT},
+      commodity_id = #{commodityId,jdbcType=BIGINT},
+      num = #{num,jdbcType=BIGINT},
+      price = #{price,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 自定义方法  -->
+  <sql id="condition">
+    <where>
+      1 = 1
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="inventoryId != null">
+        and inventory_id = #{inventoryId,jdbcType=BIGINT}
+      </if>
+      <if test="commodityId != null">
+        and commodity_id = #{commodityId,jdbcType=BIGINT}
+      </if>
+      <if test="num != null">
+        and num = #{num,jdbcType=BIGINT}
+      </if>
+      <if test="price != null">
+        and price = #{price,jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMap" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />, commodity.name, commodity.price as 'singlePrice'
+    from record, commodity
+    <include refid="condition"/>
+    and record.commodity_id = commodity.id
+    <if test="startRow != null">
+      limit #{startRow}, #{rowsPerPage}
+    </if>
+  </select>
+
+  <select id="selectRowsNum" resultType="int">
+    select count(id) from record
+  </select>
+</mapper>

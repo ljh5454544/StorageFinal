@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap-daohang.css"/>
+		<link rel="stylesheet" href="css/fileinput.min.css" />
+
+	</head>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="UTF-8"></script>
+	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/fileinput.min.js" charset="UTF-8"></script>
+	<script src="js/jquery-3.3.1.min.js" charset="UTF-8"></script>
+	<script src="js/base.js" charset="UTF-8"></script>
+	<script src="js/tenant/tenant.js" charset="UTF-8"></script>
+	<script src="js/tenant/tenant-file.js" charset="UTF-8"></script>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<a href="storage-main.html" class="navbar-brand navbar-left" >小佳仓储</a>
+				<div class="navbar-collapse collapse">
+					
+					<ul class="nav navbar-nav">
+						<li class=""><a href="user-list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+						<li class=""><a href="commodity.html"><span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;商品管理</a></li>
+						<li class="active"><a href="tenant.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;商户管理</a></li>
+						<li class=""><a href="location.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;库位管理</a></li>
+						<li class=""><a href="inventory.html"><span class="glyphicon glyphicon-oil"></span>&nbsp;&nbsp;库存管理</a></li>
+						</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							
+							<a id="dlabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<script>
+                                    document.getElementById("dlabel").innerText=getcookie("username");
+								</script>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dlabel">
+								<li><a href="user-person.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;修改密码</a></li>
+								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;切换用户</a></li>
+							</ul>
+						</li>
+						<li><a href="#" onclick="saveExit()"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;安全退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<!-- 主体 -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="list-group">
+						<a href="tenant.html" class="list-group-item">商品列表</a>
+						<a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">添加商品</a>
+						<a href="tenant-batchAdd.html" class="list-group-item active">商品导入</a>
+					</div>
+				</div>
+				<div class="col-md-10">
+					
+					<div class="page-header">
+						<h1>商户导入</h1>
+					</div>
+
+
+					<div class="">
+						<div class="">
+							<div style="">
+								<a href="http://39.96.83.161:8080/tenant/download">
+									<img src="img/excel.jpg" style="width: 20px; height: 20px;"/>
+									<span style="font-size:larger; font-weight: 200;">商户Excel-模板.xls</span>
+								</a>
+							</div>
+							<hr/>
+							<div id="excelupload">
+								<div title="Excel导入操作" style="padding: 5px">
+									<input id="excelFile" type="file" class="file">
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<button type="button" class="btn btn-primary" onclick="tenanntUploadFile()">上传</button>
+						</div>
+					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+					      </div>
+					      <div class="modal-body">
+							  <form class="" action="#" method="">
+								  <div class="form-group">
+									  <label for="addname">商户名称</label>
+									  <input id="addname" type="text" name="name" class="form-control" placeholder="请输入商户名称" />
+								  </div>
+								  <div class="form-group">
+									  <label for="addagent">负责人</label>
+									  <input id="addagent" type="text" name="agency" class="form-control" placeholder="请输入负责人" />
+								  </div>
+								  <div class="form-group">
+									  <label for="addlocation">地址</label>
+									  <input id="addlocation" type="text" name="location" class="form-control" placeholder="请输入地址" />
+								  </div>
+								  <div class="form-group">
+									  <label for="addtelphone">联系方式</label>
+									  <input id="addtelphone" type="text" name="telphone" class="form-control" placeholder="请输入联系方式" />
+								  </div>
+								  <div class="form-group">
+									  <label for="addremark">备注</label>
+									  <input id="addremark" type="text" name="remark" class="form-control" placeholder="请输入备注" />
+								  </div>
+								  <div class="form-group">
+									  <button class="btn btn-success" onclick="addTenant()">提交</button>
+									  <button type="reset" class="btn btn-warning">重置</button>
+								  </div>
+							  </form>
+					      </div>
+					      <div class="modal-footer">
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		
+	</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap-daohang.css"/>
+	</head>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="UTF-8"></script>
+	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="js/jquery-3.3.1.min.js" charset="UTF-8"></script>
+	<script src="js/base.js" charset="UTF-8"></script>
+
+	<script src="js/inventory/inventory-watch-out.js" charset="UTF-8"></script>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<a href="storage-main.html" class="navbar-brand navbar-left" >小佳仓储</a>
+				<div class="navbar-collapse collapse">
+					
+					<ul class="nav navbar-nav">
+						<li class=""><a href="user-list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+						<li class=""><a href="commodity.html"><span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;商品管理</a></li>
+						<li class=""><a href="tenant.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;商户管理</a></li>
+						<li class=""><a href="location.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;库位管理</a></li>
+						<li class="active"><a href="inventory.html"><span class="glyphicon glyphicon-oil"></span>&nbsp;&nbsp;库存管理</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a id="dlabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<script>
+                                    document.getElementById("dlabel").innerText=getcookie("username");
+								</script>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dlabel">
+								<li><a href="user-person.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;修改密码</a></li>
+								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;切换用户</a></li>
+							</ul>
+						</li>
+						<li><a href="#" onclick="saveExit()"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;安全退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		
+		<!-- 主体  -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+					<div class="page-header">
+						<h1>存单详情</h1>
+					</div>
+					
+					<table class="table">
+						<thread>
+							<tr>
+								<input type="hidden" id="inventoryId" />
+								<td>单号</td>
+								<td>承办人编号</td>
+								<td>负责人</td>
+								<td>种类</td>
+								<td>总价</td>
+								<td>创建日期</td>
+								<td>出库日期</td>
+								<td>状态</td>
+							</tr>
+						</thread>
+						
+						<tbody id="tbodyInput">
+						</tbody>
+					</table>
+					
+					<table class="table">
+						<thread>
+							<tr>
+								<td>商品名称</td>
+								<td>单价</td>
+								<td>数量</td>
+								<td>总价</td>
+							</tr>
+						</thread>
+						
+						<tbody id="record">
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+	</body>
+</html>

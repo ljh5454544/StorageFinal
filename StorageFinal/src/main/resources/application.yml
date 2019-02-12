@@ -1,0 +1,50 @@
+spring:
+  ## 数据源配置
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://139.199.69.64:3306/STORAGE?useUnicode=true&amp&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    ## 配置为Druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 1
+    maxActive: 50
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+  ## 指定静态资源的位置
+  resources:
+    static-locations: classpath:/static/,classpath:/views/,classpath:/file/,classpath:/model/
+  ## 配置Redis连接配置
+  redis:
+    database: 0
+    host: 139.199.69.64
+    port: 6379
+
+    ## 邮件发送配置
+  mail:
+    username: 2294161634@qq.com
+    password: obbrbiepdtpgdjij
+    host: smtp.qq.com
+    default-encoding: UTF-8
+    protocol: smtp
+
+    ## 配置RabbitMQ
+  rabbitmq:
+    host: 139.199.69.64
+    username: guest
+    password: guest
+    port: 5672
+
+  ## mybatis 配置
+  mybatis:
+    mapper-locations: classpath:/mapper/*Mapper.xml
+    type-aliases-package: com.jia.storage.mapper
+    configuration:
+      map-underscore-to-camel-case: true
